@@ -7,8 +7,8 @@ const Transaction = require('../models/transactionModel');
 exports.createTransaction = async (req, res) => {
     try {
         // Membuat instance transaksi baru dari data yang diterima
-        const { external_id, user_id, amount, payer_email, description, bank_code } = req.body;
-        const transaction = new Transaction(external_id, user_id, amount, payer_email, description, bank_code);
+        const { external_id, amount, payer_email, description } = req.body;
+        const transaction = new Transaction(external_id, amount, payer_email, description);
 
         // Mengirim transaksi ke API Xendit
         const xenditResponse = await axios.post('https://api.xendit.co/v2/invoices', transaction, {
